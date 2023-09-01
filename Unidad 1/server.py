@@ -20,13 +20,14 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
 
         body_json = json.loads(post_data.decode())
         print(body_json['action'])
+        print(body_json['value'])
 
         global contador
 
         if(body_json['action'] == 'asc') :
-            contador += 1
+            contador = contador + body_json['value']
         elif(body_json['action'] == 'dec'):
-            contador -= 1
+            contador = contador - body_json['value']
 
 
         # Print the complete HTTP request
@@ -37,7 +38,7 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         print("-------------------------------")
 
         # Respond to the client
-        response_data = json.dumps({"message": "Received POST data", "data": post_data.decode(), "status": "OK"})
+        response_data = json.dumps({"message": "Received POST data", "data": post_data.decode(), "status": "Contador Actualizado"})
         self._set_response("application/json")
         self.wfile.write(response_data.encode())
 
