@@ -15,6 +15,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-wrap: wrap;
             margin-top: 120px;
             font-family: 'Montserrat', sans-serif;
         }
@@ -25,7 +26,7 @@
             margin-top: 50px;
             margin-bottom: 20px; /* Agregamos margen en la parte inferior para separar los contenedores */
             margin: 5px;
-            width: 100%;
+            width: 600px;
             height: 250px;
             box-sizing: border-box;
         }
@@ -75,14 +76,22 @@
         }
 
         /* Responsive */
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 868px) {
+            body {
+                flex-wrap: wrap;
+            }
             .container {
-                width: 90%; /* Reducimos el ancho para dispositivos pequeños */
+                width: 500px; /* Reducimos el ancho para dispositivos pequeños */
             }
 
             .button-container {
                 flex-direction: column; /* Los botones se mostrarán uno debajo del otro */
                 align-items: center; /* Centra los botones en el eje horizontal */
+            }
+
+            .button_blue, .button_red {
+                width: 90px;
+                height: 60px;
             }
         }
     </style>
@@ -97,8 +106,20 @@
     </div>
     <div class="container">
         <h1>Valor del contador</h1>
-        <div class="buttonContainer">
+        <div class="contador">
             <p id="counter">##</p>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Temperatura</h1>
+        <div class="temperature">
+            <p id="temperature">15-7</p>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Humudity</h1>
+        <div class="humidity">
+            <p id="humidity">20.1</p>
         </div>
     </div>
 </body>
@@ -122,6 +143,15 @@
         });
     };
 
+    const updateTemperature = () => {
+        fetch("/temperature")
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById("temperature").innerHTML = data.temperature;
+        })
+    }
+
     setInterval(updateCounter, 1000);
+    setInterval(updateTemperature, 1000);
 </script>
 </html>

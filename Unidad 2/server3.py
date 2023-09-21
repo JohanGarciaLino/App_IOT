@@ -5,6 +5,7 @@ import os
 contador = 11
 led = False
 temperature = 15.6
+humidity = 20.1
 
 
 class MyHTTPRequestHandler(BaseHTTPRequestHandler):
@@ -55,6 +56,10 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
       self._set_response()
       self.wfile.write(json.dumps({"temperature": temperature}).encode())
 
+    elif self.path == "/humidity":
+      self._set_response()
+      self.wfile.write(json.dumps({"humidity": temperature}).encode())
+
     else:
       # send bad request response
       self.throw_custom_error("Invalid path")
@@ -75,22 +80,45 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         self.throw_custom_error("Missing temperature")
         return
       
-      #Check is temperature is valid, float
+      # Check is temperature is valid, float
       try:
         float(body_json['temperature'])
       except:
         self.throw_custom_error("Invalid temperature")
         return
 
-    global temperature
-    temperature = float(body_json['temperature'])
+      global temperature
+      temperature = float(body_json['temperature'])
 
-    #Respond to the client
-    response_data = json.dumps({"message": "Received POST data, new temperature " + str(temperature), "status": "OK"})
+      #Respond to the client
+      response_data = json.dumps({"message": "Received POST data, new temperature " + str(temperature), "status": "OK"})
 
-    self._set_response("application/json")
-    self.wfile.write(response_data.encode())
-    return
+      self._set_response("application/json")
+      self.wfile.write(response_data.encode())
+      return
+    
+    # Check if path is /humidity
+    if (self.path == "/humidity"):
+      if (body_json.get('humidity') is None):
+        self.throw_custom_error("Missing humidity")
+        return
+      
+      # Check is humidity is valid, float
+      try:
+        float(body_json['humidity'])
+      except:
+        self.throw_custom_error("Invalid humidity")
+        return
+      
+      global humidity
+      humidity = float(body_json['humidity'])
+
+      #Respond to the client
+      response_data = json.dumps({"message": "Received POST data, new humidity " + str(humidity), "status": "OK"})
+
+      self._set_response("application/json")
+      self.wfile.write(response_data.encode())
+      return
 
     global contador
 
