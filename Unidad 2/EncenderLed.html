@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encender o Apagar LED</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #333333;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 120px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .container {
+            background-color: #555555;
+            padding: 10px;
+            margin-top: 50px;
+            margin-bottom: 20px; /* Agregamos margen en la parte inferior para separar los contenedores */
+            margin: 5px;
+            width: 100%;
+            height: 250px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        p {
+            color: #fff;
+            font-weight: 800;
+            font-size: 40px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button_blue {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        .button_red {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        .button_blue:hover {
+            background-color: #0056b3;
+        }
+
+        .button_red:hover {
+            background-color: #FF351E;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 90%; /* Reducimos el ancho para dispositivos pequeños */
+            }
+
+            .button-container {
+                flex-direction: column; /* Los botones se mostrarán uno debajo del otro */
+                align-items: center; /* Centra los botones en el eje horizontal */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Encender o apagar LED</h1>
+        <div class="button-container">
+            <button class="button_blue" id="onButton">ON </button>
+            <button class="button_red" id="offButton">OFF </button>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Valor del contador</h1>
+        <div class="buttonContainer">
+            <p id="counter">##</p>
+        </div>
+    </div>
+</body>
+<script>
+    const onButton = document.getElementById("onButton");
+    const offButton = document.getElementById("offButton");
+
+    onButton.addEventListener("click", () => {
+      fetch("/led/on");
+    });
+
+    offButton.addEventListener("click", () => {
+      fetch("/led/off");
+    });
+
+    const updateCounter = () => {
+      fetch("/counter")
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("counter").innerHTML = data.contador;
+        });
+    };
+
+    setInterval(updateCounter, 1000);
+</script>
+</html>
