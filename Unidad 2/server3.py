@@ -4,6 +4,7 @@ import os
 
 contador = 11
 led = False
+temperature = 15.6
 
 
 class MyHTTPRequestHandler(BaseHTTPRequestHandler):
@@ -50,6 +51,10 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
       self._set_response()
       self.wfile.write(json.dumps({"status": led}).encode())
 
+    elif self.path == "/temperature":
+      self._set_response()
+      self.wfile.write(json.dumps({"temperature": temperature}).encode())
+
     else:
       # send bad request response
       self.throw_custom_error("Invalid path")
@@ -63,6 +68,29 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
     except:
       self.throw_custom_error("Invalid JSON")
       return
+    
+    # check if path is /temperature
+    if (self.path == "/temperature"):
+      if (body_json.get('temperature') is None):
+        self.throw_custom_error("Missing temperature")
+        return
+      
+      #Check is temperature is valid, float
+      try:
+        float(body_json['temperature'])
+      except:
+        self.throw_custom_error("Invalid temperature")
+        return
+
+    global temperature
+    temperature = float(body_json['temperature'])
+
+    #Respond to the client
+    response_data = json.dumps({"message": "Received POST data, new temperature " + str(temperature), "status": "OK"})
+
+    self._set_response("application/json")
+    self.wfile.write(response_data.encode())
+    return
 
     global contador
 
