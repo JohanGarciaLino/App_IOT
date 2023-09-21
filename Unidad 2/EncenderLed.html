@@ -23,9 +23,11 @@
         .container {
             background-color: #555555;
             padding: 10px;
-            margin-top: 50px;
-            margin-bottom: 20px; /* Agregamos margen en la parte inferior para separar los contenedores */
-            margin: 5px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
             width: 600px;
             height: 250px;
             box-sizing: border-box;
@@ -76,7 +78,7 @@
         }
 
         /* Responsive */
-        @media screen and (max-width: 868px) {
+        @media screen and (max-width: 1368px) {
             body {
                 flex-wrap: wrap;
             }
@@ -92,6 +94,12 @@
             .button_blue, .button_red {
                 width: 90px;
                 height: 60px;
+            }
+        }
+
+        @media screen and (max-width: 1300px) {
+            .container {
+                width: 300px;
             }
         }
     </style>
@@ -117,7 +125,7 @@
         </div>
     </div>
     <div class="container">
-        <h1>Humudity</h1>
+        <h1>Humidity</h1>
         <div class="humidity">
             <p id="humidity">20.1</p>
         </div>
@@ -147,11 +155,21 @@
         fetch("/temperature")
         .then((response) => response.json())
         .then((data) => {
-            document.getElementById("temperature").innerHTML = data.temperature;
+            
+            document.getElementById("temperature").innerHTML = data.temperature.toFixed(2) + " °C";
+        })
+    }
+
+    const updateHumidity = () => {
+        fetch("/humidity")
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById("humidity").innerHTML = data.humidity + "%";
         })
     }
 
     setInterval(updateCounter, 1000);
     setInterval(updateTemperature, 1000);
+    setInterval(updateHumidity, 1000);
 </script>
 </html>

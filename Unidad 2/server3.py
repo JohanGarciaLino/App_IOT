@@ -58,7 +58,7 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
 
     elif self.path == "/humidity":
       self._set_response()
-      self.wfile.write(json.dumps({"humidity": temperature}).encode())
+      self.wfile.write(json.dumps({"humidity": humidity}).encode())
 
     else:
       # send bad request response
