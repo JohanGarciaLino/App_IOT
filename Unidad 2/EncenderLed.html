@@ -1,137 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Encender o Apagar LED</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"
+    />
     <style>
+      body {
+        background-color: #333333;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 120px;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .container {
+        background-color: #555555;
+        padding: 10px;
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 600px;
+        height: 250px;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        color: #fff;
+      }
+
+      p {
+        color: #fff;
+        font-weight: 800;
+        font-size: 40px;
+      }
+
+      .button-container {
+        margin-top: 20px;
+      }
+
+      .button_blue {
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin: 5px;
+        border-radius: 5px;
+      }
+
+      .button_red {
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: #ff0000;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin: 5px;
+        border-radius: 5px;
+      }
+
+      .button_blue:hover {
+        background-color: #0056b3;
+      }
+
+      .button_red:hover {
+        background-color: #ff351e;
+      }
+
+      /* Responsive */
+      @media screen and (max-width: 1368px) {
         body {
-            background-color: #333333;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 120px;
-            font-family: 'Montserrat', sans-serif;
+          flex-wrap: wrap;
         }
-
         .container {
-            background-color: #555555;
-            padding: 10px;
-            margin: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            width: 600px;
-            height: 250px;
-            box-sizing: border-box;
-        }
-
-        h1 {
-            color: #fff;
-        }
-
-        p {
-            color: #fff;
-            font-weight: 800;
-            font-size: 40px;
+          width: 500px; /* Reducimos el ancho para dispositivos pequeños */
         }
 
         .button-container {
-            margin-top: 20px;
+          flex-direction: column; /* Los botones se mostrarán uno debajo del otro */
+          align-items: center; /* Centra los botones en el eje horizontal */
         }
 
-        .button_blue {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            margin: 5px;
-            border-radius: 5px;
-        }
-
+        .button_blue,
         .button_red {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #ff0000;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            margin: 5px;
-            border-radius: 5px;
+          width: 90px;
+          height: 60px;
         }
+      }
 
-        .button_blue:hover {
-            background-color: #0056b3;
+      @media screen and (max-width: 1300px) {
+        .container {
+          width: 300px;
         }
-
-        .button_red:hover {
-            background-color: #FF351E;
-        }
-
-        /* Responsive */
-        @media screen and (max-width: 1368px) {
-            body {
-                flex-wrap: wrap;
-            }
-            .container {
-                width: 500px; /* Reducimos el ancho para dispositivos pequeños */
-            }
-
-            .button-container {
-                flex-direction: column; /* Los botones se mostrarán uno debajo del otro */
-                align-items: center; /* Centra los botones en el eje horizontal */
-            }
-
-            .button_blue, .button_red {
-                width: 90px;
-                height: 60px;
-            }
-        }
-
-        @media screen and (max-width: 1300px) {
-            .container {
-                width: 300px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Encender o apagar LED</h1>
-        <div class="button-container">
-            <button class="button_blue" id="onButton">ON </button>
-            <button class="button_red" id="offButton">OFF </button>
-        </div>
+      <h1>Encender o apagar LED</h1>
+      <div class="button-container">
+        <button class="button_blue" id="onButton">ON</button>
+        <button class="button_red" id="offButton">OFF</button>
+      </div>
     </div>
     <div class="container">
-        <h1>Valor del contador</h1>
-        <div class="contador">
-            <p id="counter">##</p>
-        </div>
+      <h1>Valor del contador</h1>
+      <div class="contador">
+        <p id="counter">##</p>
+      </div>
     </div>
     <div class="container">
-        <h1>Temperatura</h1>
-        <div class="temperature">
-            <p id="temperature">15-7</p>
-        </div>
+      <h1>Temperature</h1>
+      <div class="temperature">
+        <p id="temperature">15-7</p>
+      </div>
     </div>
     <div class="container">
-        <h1>Humidity</h1>
-        <div class="humidity">
-            <p id="humidity">20.1</p>
-        </div>
+      <h1>Humidity</h1>
+      <div class="humidity">
+        <p id="humidity">20.1</p>
+      </div>
     </div>
-</body>
-<script>
+  </body>
+  <script>
     const onButton = document.getElementById("onButton");
     const offButton = document.getElementById("offButton");
 
@@ -152,24 +154,24 @@
     };
 
     const updateTemperature = () => {
-        fetch("/temperature")
+      fetch("/temperature")
         .then((response) => response.json())
         .then((data) => {
-            
-            document.getElementById("temperature").innerHTML = data.temperature.toFixed(2) + " °C";
-        })
-    }
+          document.getElementById("temperature").innerHTML =
+            data.temperature.toFixed(2) + " °C";
+        });
+    };
 
     const updateHumidity = () => {
-        fetch("/humidity")
+      fetch("/humidity")
         .then((response) => response.json())
         .then((data) => {
-            document.getElementById("humidity").innerHTML = data.humidity + "%";
-        })
-    }
+          document.getElementById("humidity").innerHTML = data.humidity + "%";
+        });
+    };
 
     setInterval(updateCounter, 1000);
     setInterval(updateTemperature, 1000);
     setInterval(updateHumidity, 1000);
-</script>
+  </script>
 </html>
