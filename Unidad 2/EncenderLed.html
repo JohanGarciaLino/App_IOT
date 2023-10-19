@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
+
       body {
         background-color: #333333;
         font-family: Arial, sans-serif;
@@ -19,10 +20,16 @@
         flex-wrap: wrap;
         margin-top: 120px;
         font-family: "Montserrat", sans-serif;
+        background-image: url('https://cdn.pixabay.com/photo/2020/04/09/02/26/tree-5019381_1280.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
       }
 
       .container {
-        background-color: #555555;
+        background-color: rgba(255, 255, 255, .15);  
+        backdrop-filter: blur(20px);
         padding: 10px;
         margin: 10px;
         display: flex;
@@ -78,6 +85,19 @@
         background-color: #ff351e;
       }
 
+      .temperature, .contador, .humidity, .button-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-right: 70px;
+      }
+
+      .material-symbols-outlined {
+        font-size: 80px;
+        color: white;
+      }
+
       /* Responsive */
       @media screen and (max-width: 1368px) {
         body {
@@ -108,47 +128,49 @@
   </head>
   <body>
     <div class="container">
-      <h1>
-        Encender o apagar LED
-        <span class="material-symbols-outlined">
-          bolt
-        </span>
-      </h1>
+      <h1>Encender o apagar LED</h1>
       <div class="button-container">
-        <button class="button_blue" id="onButton">ON</button>
-        <button class="button_red" id="offButton">OFF</button>
+        <div class="icon">
+          <span class="material-symbols-outlined">
+            bolt
+          </span>
+        </div>
+        <div class="buttons">
+          <button class="button_blue" id="onButton">ON</button>
+          <button class="button_red" id="offButton">OFF</button>
+        </div>
       </div>
     </div>
     <div class="container">
-      <h1>
-        Valor del contador
-        <span class="material-symbols-outlined">
-          calculate
-        </span>
-      </h1>
+      <h1>Valor del contador</h1>
       <div class="contador">
+        <div class="icon">
+          <span class="material-symbols-outlined">
+            calculate
+          </span>
+        </div>
         <p id="counter">##</p>
       </div>
     </div>
     <div class="container">
-      <h1>
-        Temperature
-        <span class="material-symbols-outlined">
-          device_thermostat
-        </span>
-      </h1>
+      <h1>Temperature</h1>
       <div class="temperature">
-        <p id="temperature">15-7</p>
+        <div class="icon">
+          <span class="material-symbols-outlined">
+            device_thermostat
+          </span>
+        </div>
+        <p id="temperature">15.7</p>
       </div>
     </div>
     <div class="container">
-      <h1>
-        Humidity
-        <span class="material-symbols-outlined">
-          water_drop
-        </span>
-      </h1>
+      <h1>Humidity</h1>
       <div class="humidity">
+        <div class="icon">
+          <span class="material-symbols-outlined">
+            water_drop
+          </span>
+        </div>
         <p id="humidity">20.1</p>
       </div>
     </div>
